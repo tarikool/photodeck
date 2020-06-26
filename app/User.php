@@ -51,7 +51,7 @@ class User extends Authenticatable
     public $status = [
         'active' => 'Active',
         'block' => 'BLock',
-        'unlist' => 'unlist',
+        'unlist' => 'Unlist',
     ];
 
 

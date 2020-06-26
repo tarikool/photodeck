@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use App\Traits\EssentialTrait;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
+    use EssentialTrait;
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -49,10 +51,15 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'dob' => ['required', 'date'],
+            'gender' => ['required', 'string', 'max:10'],
+            'phone' => ['nullable', 'regex:/^(\+88)?(01)[0-9]{9}$/', 'max:14'],
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
     }
 
@@ -64,10 +71,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $request = request();
+        $data['image'] = $this->storeImage($request, 'image');
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role' => 'user',
+            'dob' => $data['dob'],
+            'gender' => $data['gender'],
+            'phone' => $data['phone'],
+            'image' => $data['image'],
         ]);
     }
 }
