@@ -1,5 +1,6 @@
 ﻿Database Name = photodeck
-please run
+<br>
+Please run  
 composer install
 
 
