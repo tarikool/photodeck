@@ -1,0 +1,15 @@
+.blue{
+    color: #03a9f3 !important;
+}
+
+
+.image-input{
+    display: none;
+}
+
+
+.story{
+    width: 25%;
+    margin-left: 5px;
+    margin-right: 5px;
+}

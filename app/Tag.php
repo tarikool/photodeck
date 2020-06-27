@@ -9,7 +9,7 @@ class Tag extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [ 'tag', 'story_id', 'status', 'taggable_id', 'taggable_type', ];
+    protected $fillable = [ 'tag', 'status', 'taggable_id', 'taggable_type', ];
 
 
     public function taggable()

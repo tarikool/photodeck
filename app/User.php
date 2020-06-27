@@ -55,6 +55,16 @@ class User extends Authenticatable
     ];
 
 
+    public function isAdmin()
+    {
+        if ($this->role == 'admin')
+            return true;
+
+        return false;
+    }
+
+
+
     public function getImageAttribute($value)
     {
         return $this->preventGetImgAttr ? $value : url('storage/'.$value);
@@ -69,7 +79,7 @@ class User extends Authenticatable
 
     public function comments()
     {
-        return $this->hasMany('App\Comment', 'comment_id');
+        return $this->hasMany('App\Comment', 'user_id');
     }
 
 

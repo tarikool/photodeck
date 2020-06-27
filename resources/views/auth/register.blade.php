@@ -79,8 +79,8 @@
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">{{ __('Photo') }}</label>
                             <div class="col-md-6">
-                                <input type="file" class="form-control-file" name="photo">
-                                <p class="text-danger">{{ $errors->has('photo') ? $errors->first('photo') : '' }}</p>
+                                <input type="file" class="form-control-file" name="image">
+                                <p class="text-danger">{{ $errors->has('image') ? $errors->first('image') : '' }}</p>
                             </div>
                         </div>
 

@@ -27,37 +27,58 @@
 
     <link href="//cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
     <link href="//cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 
     @yield('style')
 </head>
 
 <body>
 
-    @include('layouts.shared.sidebar')
+@include('layouts.shared.sidebar')
+<div class="right-panel">
+    @include('layouts.shared.navbar')
 
-    <div id="right-panel" class="right-panel">
-        @include('layouts.shared.navbar')
+    <div class="content">
+        <div class="animated fadeIn">
+            @include('layouts.shared.notification')
 
-        <div class="content">
-            <div class="animated fadeIn">
+            @yield('content')
 
-                @yield('content')
 
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary submit">Save changes</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
 
-        <div class="clearfix"></div>
-
-        @include('layouts.shared.footer')
-
     </div>
 
+    <div class="clearfix"></div>
 
+    @include('layouts.shared.footer')
+</div>
 
 </body>
 <!-- Scripts -->
-<script src="//cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+{{--<script src="//cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>--}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script src="//cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
@@ -80,6 +101,24 @@
 <script src="//cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
 <script src="{{ asset('ElaAdmin/assets/js/init/fullcalendar-init.js') }}"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#myModal').on('show.bs.modal', function (e) {
+            var url = $(e.relatedTarget).data('url');
+            var title = $(e.relatedTarget).data('title');
+            $(this).find('.modal-title').text(title);
+            $(this).find('.modal-body').load(url);
+        });
+
+        $(':button.submit').on('click', function (e) {
+            $('.edit-form').submit()
+        })
+    })
+</script>
+
 
 @yield('script')
 
